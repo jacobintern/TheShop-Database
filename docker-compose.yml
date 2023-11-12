@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  db:
+    container_name: theshop-db
+    build: ./
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'TheShopDB'
+      MYSQL_ROOT_PASSWORD: 'P@ssw0rd'
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

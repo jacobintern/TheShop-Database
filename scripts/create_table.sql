@@ -1,0 +1,84 @@
+START TRANSACTION;
+
+-- 會員
+CREATE TABLE Accounts (
+    accID INT NOT NULL AUTO_INCREMENT,
+    account VARCHAR(255) NOT NULL,
+    pswd VARCHAR(8000) NOT NULL,
+    createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    CONSTRAINT PK_Accounts PRIMARY KEY (accID),
+    UNIQUE(Account)
+);
+
+-- 會員資訊
+CREATE TABLE Members (
+    memberID INT NOT NULL AUTO_INCREMENT,
+    accID INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    live VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    id VARCHAR(20) NOT NULL, 
+    createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME NOT NULL,
+    CONSTRAINT FK_Accounts_Members FOREIGN KEY (accID) REFERENCES Accounts(accID),
+    CONSTRAINT PK_Members PRIMARY KEY (memberID),
+    UNIQUE(id)
+);
+
+-- 會員運送資訊
+CREATE TABLE DeliveryPrefer (
+    preferID INT NOT NULL AUTO_INCREMENT,
+    memberID INT NOT NULL,
+    deliveryID INT NOT NULL,
+    isSelected BOOLEAN,
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME
+);
+
+-- 店到店運送資訊
+CREATE TABLE B2BDeliveryInfo (
+    deliveryID INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME
+);
+
+-- 商品資訊
+CREATE TABLE Product (
+    productID INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(6,2) NOT NULL,
+    stock INT NOT NULL,
+    spec VARCHAR(MAX),
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME
+);
+
+-- 商品圖片
+CREATE TABLE ProductImg (
+    imgID INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME
+);
+
+-- 訂單
+CREATE TABLE Order (
+    orderID INT NOT NULL AUTO_INCREMENT,
+    accID INT NOT NULL,
+    total DECIMAL(6,2) NOT NULL,
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME
+);
+
+-- 訂單明細
+CREATE TABLE OrderBody (
+    bodyID INT NOT NULL AUTO_INCREMENT,
+    productID INT NOT NULL,
+    num INT NOT NULL,
+    subTotal DECIMAL(6,2) NOT NULL,
+);
+
+COMMIT;
