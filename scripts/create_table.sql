@@ -26,19 +26,6 @@ CREATE TABLE Members (
     UNIQUE(id)
 );
 
--- 會員運送資訊
-CREATE TABLE DeliveryPrefer (
-    preferID INT NOT NULL AUTO_INCREMENT,
-    memberID INT NOT NULL,
-    deliveryID INT NOT NULL,
-    isSelected BOOLEAN,
-    createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    updateTime DATETIME NULL,
-    CONSTRAINT PK_DeliveryPrefer PRIMARY KEY(perferID),
-    CONSTRAINT FK_Members_DeliveryPrefer FOREIGN KEY(memberID) REFERENCES Members(memberID),
-    CONSTRAINT FK_B2BDelivery_DeliveryPrefer FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID)
-);
-
 -- 店到店運送資訊
 CREATE TABLE B2BDelivery (
     deliveryID INT NOT NULL AUTO_INCREMENT,
@@ -48,13 +35,26 @@ CREATE TABLE B2BDelivery (
     CONSTRAINT PK_B2BDelivery PRIMARY KEY(deliveryID)
 );
 
+-- 會員運送資訊
+CREATE TABLE DeliveryPrefer (
+    preferID INT NOT NULL AUTO_INCREMENT,
+    memberID INT NOT NULL,
+    deliveryID INT NOT NULL,
+    isSelected BOOLEAN,
+    createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME NULL,
+    CONSTRAINT PK_DeliveryPrefer PRIMARY KEY(preferID),
+    CONSTRAINT FK_Members_DeliveryPrefer FOREIGN KEY(memberID) REFERENCES Members(memberID),
+    CONSTRAINT FK_B2BDelivery_DeliveryPrefer FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID)
+);
+
 -- 商品資訊
 CREATE TABLE Products (
     productID INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
     stock INT NOT NULL,
-    spec VARCHAR(MAX),
+    spec TEXT,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Products PRIMARY KEY(productID)
