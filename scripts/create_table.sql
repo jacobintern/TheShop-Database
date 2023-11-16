@@ -69,7 +69,7 @@ CREATE TABLE StockTracking (
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT PK_StockTracking PRIMARY KEY(trackID),
     CONSTRAINT FK_Products_StockTracking FOREIGN KEY(productID) REFERENCES Products(productID),
-)
+);
 
 -- 商品圖片
 CREATE TABLE ProductImgs (
