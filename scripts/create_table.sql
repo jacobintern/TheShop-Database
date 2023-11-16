@@ -23,7 +23,7 @@ CREATE TABLE Members (
     updateTime DATETIME NULL,
     CONSTRAINT PK_Members PRIMARY KEY(memberID),
     CONSTRAINT FK_Accounts_Members FOREIGN KEY(accID) REFERENCES Accounts(accID),
-    UNIQUE(id),
+    UNIQUE(id)
 );
 
 -- 會員運送資訊
@@ -36,7 +36,7 @@ CREATE TABLE DeliveryPrefer (
     updateTime DATETIME NULL,
     CONSTRAINT PK_DeliveryPrefer PRIMARY KEY(perferID),
     CONSTRAINT FK_Members_DeliveryPrefer FOREIGN KEY(memberID) REFERENCES Members(memberID),
-    CONSTRAINT FK_B2BDelivery_DeliveryPrefer FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID),
+    CONSTRAINT FK_B2BDelivery_DeliveryPrefer FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID)
 );
 
 -- 店到店運送資訊
@@ -45,7 +45,7 @@ CREATE TABLE B2BDelivery (
     name VARCHAR(255) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
-    CONSTRAINT PK_B2BDelivery PRIMARY KEY(deliveryID),
+    CONSTRAINT PK_B2BDelivery PRIMARY KEY(deliveryID)
 );
 
 -- 商品資訊
@@ -57,7 +57,7 @@ CREATE TABLE Products (
     spec VARCHAR(MAX),
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
-    CONSTRAINT PK_Products PRIMARY KEY(productID),
+    CONSTRAINT PK_Products PRIMARY KEY(productID)
 );
 
 -- 庫存更新日誌
@@ -68,7 +68,7 @@ CREATE TABLE StockTracking (
     afterValue INT NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT PK_StockTracking PRIMARY KEY(trackID),
-    CONSTRAINT FK_Products_StockTracking FOREIGN KEY(productID) REFERENCES Products(productID),
+    CONSTRAINT FK_Products_StockTracking FOREIGN KEY(productID) REFERENCES Products(productID)
 );
 
 -- 商品圖片
@@ -79,7 +79,7 @@ CREATE TABLE ProductImgs (
     url VARCHAR(255) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
-    CONSTRAINT PK_ProductImg PRIMARY KEY(imgID),
+    CONSTRAINT PK_ProductImg PRIMARY KEY(imgID)
 );
 
 -- 訂單
@@ -90,7 +90,7 @@ CREATE TABLE Orders (
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Order PRIMARY KEY(orderID),
-    CONSTRAINT FK_Accounts_Orders FOREIGN KEY(accID) REFERENCES Accounts(accID),
+    CONSTRAINT FK_Accounts_Orders FOREIGN KEY(accID) REFERENCES Accounts(accID)
 );
 
 -- 訂單明細
@@ -102,7 +102,7 @@ CREATE TABLE OrderBody (
     subTotal DECIMAL(6,2) NOT NULL,
     CONSTRAINT PK_OrderBody PRIMARY KEY(bodyID),
     CONSTRAINT FK_Products_OrderBody FOREIGN KEY(productID) REFERENCES Products(productID),
-    CONSTRAINT FK_Orders_OrderBody FOREIGN KEY(orderID) REFERENCES Orders(orderID),
+    CONSTRAINT FK_Orders_OrderBody FOREIGN KEY(orderID) REFERENCES Orders(orderID)
 );
 
 COMMIT;
