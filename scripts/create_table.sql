@@ -40,7 +40,7 @@ CREATE TABLE DeliveryPrefer (
     preferID INT NOT NULL AUTO_INCREMENT,
     memberID INT NOT NULL,
     deliveryID INT NOT NULL,
-    isSelected BOOLEAN,
+    isDefault BOOLEAN,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_DeliveryPrefer PRIMARY KEY(preferID),
