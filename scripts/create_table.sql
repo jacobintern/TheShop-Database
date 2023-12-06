@@ -29,7 +29,7 @@ CREATE TABLE Members (
 -- 店到店運送資訊
 CREATE TABLE B2BDelivery (
     deliveryID INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL ,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_B2BDelivery PRIMARY KEY(deliveryID)
@@ -108,7 +108,6 @@ CREATE TABLE OrderBody (
 
 COMMIT;
 
-
 START TRANSACTION;
 insert into Products(name, price, stock, spec) values('product A', 1.00, 10, 'product A description');
 insert into Products(name, price, stock, spec) values('product B', 2.00, 20, 'product B description');
@@ -141,4 +140,15 @@ insert into ProductImgs(productID, name, type, url) values(8, 'banner H', 0, 'ht
 insert into ProductImgs(productID, name, type, url) values(8, 'content H', 1, 'https://memes.tw/user-text-tmp/1701325752550.png');
 insert into ProductImgs(productID, name, type, url) values(9, 'banner I', 0, 'https://memes.tw/user-text-tmp/1701325688306.png');
 insert into ProductImgs(productID, name, type, url) values(9, 'content I', 1, 'https://memes.tw/user-text-tmp/1701325762085.png');
+
+COMMIT;
+
+START TRANSACTION;
+
+insert into B2BDelivery(name) values(N'7-11');
+insert into B2BDelivery(name) values(N'全家');
+insert into B2BDelivery(name) values(N'OK');
+insert into B2BDelivery(name) values(N'萊爾富');
+insert into B2BDelivery(name) values(N'蝦皮');
+
 COMMIT;

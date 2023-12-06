@@ -10,6 +10,8 @@ services:
     environment:
       MYSQL_DATABASE: 'TheShopDB'
       MYSQL_ROOT_PASSWORD: 'P@ssw0rd'
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
       - 3306:3306
   # adminer:
