@@ -1,11 +1,9 @@
-version: '3.7'
+version: '3.9'
 
 services:
-
   db:
     container_name: theshop-db
     build: ./
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_DATABASE: 'TheShopDB'
@@ -14,8 +12,14 @@ services:
       MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
       - 3306:3306
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - shop_network
+
+volumes:
+  mysql_data:
+   
+networks:
+  shop_network:
+   external: true
