@@ -1,7 +1,7 @@
 START TRANSACTION;
 
 -- 會員
-CREATE TABLE Accounts (
+CREATE TABLE Account (
     accID INT NOT NULL AUTO_INCREMENT,
     account VARCHAR(255) NOT NULL,
     pswd VARCHAR(100) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Accounts (
 );
 
 -- 會員資訊
-CREATE TABLE Members (
+CREATE TABLE Member (
     memberID INT NOT NULL AUTO_INCREMENT,
     accID INT NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE DeliveryPrefer (
 );
 
 -- 商品資訊
-CREATE TABLE Products (
+CREATE TABLE Product (
     productID INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE Products (
 );
 
 -- 商品圖片
-CREATE TABLE ProductImgs (
+CREATE TABLE ProductImg (
     imgID INT NOT NULL AUTO_INCREMENT,
     productID INT NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE StockTracking (
 );
 
 -- 訂單
-CREATE TABLE Orders (
+CREATE TABLE Order (
     orderID INT NOT NULL AUTO_INCREMENT,
     accID INT NOT NULL,
     total DECIMAL(6,2) NOT NULL,
@@ -109,38 +109,37 @@ CREATE TABLE OrderBody (
 COMMIT;
 
 START TRANSACTION;
-insert into Products(name, price, stock, spec) values('product A', 1.00, 10, 'product A description');
-insert into Products(name, price, stock, spec) values('product B', 2.00, 20, 'product B description');
-insert into Products(name, price, stock, spec) values('product C', 3.00, 30, 'product C description');
-insert into Products(name, price, stock, spec) values('product D', 4.00, 40, 'product D description');
-insert into Products(name, price, stock, spec) values('product E', 5.00, 50, 'product E description');
-insert into Products(name, price, stock, spec) values('product F', 6.00, 60, 'product F description');
-insert into Products(name, price, stock, spec) values('product G', 7.00, 70, 'product G description');
-insert into Products(name, price, stock, spec) values('product H', 8.00, 80, 'product H description');
-insert into Products(name, price, stock, spec) values('product I', 9.00, 90, 'product I description');
+insert into Product(name, price, stock, spec) values('product A', 1.00, 10, 'product A description');
+insert into Product(name, price, stock, spec) values('product B', 2.00, 20, 'product B description');
+insert into Product(name, price, stock, spec) values('product C', 3.00, 30, 'product C description');
+insert into Product(name, price, stock, spec) values('product D', 4.00, 40, 'product D description');
+insert into Product(name, price, stock, spec) values('product E', 5.00, 50, 'product E description');
+insert into Product(name, price, stock, spec) values('product F', 6.00, 60, 'product F description');
+insert into Product(name, price, stock, spec) values('product G', 7.00, 70, 'product G description');
+insert into Product(name, price, stock, spec) values('product H', 8.00, 80, 'product H description');
+insert into Product(name, price, stock, spec) values('product I', 9.00, 90, 'product I description');
 
 COMMIT;
 
 START TRANSACTION;
-insert into ProductImgs(productID, name, type, url) values(1, 'banner A', 0, 'https://memes.tw/user-text-tmp/1701315859722.png');
-insert into ProductImgs(productID, name, type, url) values(1, 'content A', 1, 'https://memes.tw/user-text-tmp/1701325529594.png');
-insert into ProductImgs(productID, name, type, url) values(2, 'banner B', 0, 'https://memes.tw/user-text-tmp/1701325565805.png');
-insert into ProductImgs(productID, name, type, url) values(2, 'content B', 1, 'https://memes.tw/user-text-tmp/1701325704158.png');
-insert into ProductImgs(productID, name, type, url) values(3, 'banner C', 0, 'https://memes.tw/user-text-tmp/1701325578286.png');
-insert into ProductImgs(productID, name, type, url) values(3, 'content C', 1, 'https://memes.tw/user-text-tmp/1701325713899.png');
-insert into ProductImgs(productID, name, type, url) values(4, 'banner D', 0, 'https://memes.tw/user-text-tmp/1701325591362.png');
-insert into ProductImgs(productID, name, type, url) values(4, 'content D', 1, 'https://memes.tw/user-text-tmp/1701325721109.png');
-insert into ProductImgs(productID, name, type, url) values(5, 'banner E', 0, 'https://memes.tw/user-text-tmp/1701325600931.png');
-insert into ProductImgs(productID, name, type, url) values(5, 'content E', 1, 'https://memes.tw/user-text-tmp/1701325728589.png');
-insert into ProductImgs(productID, name, type, url) values(6, 'banner F', 0, 'https://memes.tw/user-text-tmp/1701325660041.png');
-insert into ProductImgs(productID, name, type, url) values(6, 'content F', 1, 'https://memes.tw/user-text-tmp/1701325735979.png');
-insert into ProductImgs(productID, name, type, url) values(7, 'banner G', 0, 'https://memes.tw/user-text-tmp/1701325670890.png');
-insert into ProductImgs(productID, name, type, url) values(7, 'content G', 1, 'https://memes.tw/user-text-tmp/1701325744264.png');
-insert into ProductImgs(productID, name, type, url) values(8, 'banner H', 0, 'https://memes.tw/user-text-tmp/1701325680227.png');
-insert into ProductImgs(productID, name, type, url) values(8, 'content H', 1, 'https://memes.tw/user-text-tmp/1701325752550.png');
-insert into ProductImgs(productID, name, type, url) values(9, 'banner I', 0, 'https://memes.tw/user-text-tmp/1701325688306.png');
-insert into ProductImgs(productID, name, type, url) values(9, 'content I', 1, 'https://memes.tw/user-text-tmp/1701325762085.png');
-
+insert into ProductImg(productID, name, type, url) values(1, 'banner A', 0, 'https://memes.tw/user-text-tmp/1701315859722.png');
+insert into ProductImg(productID, name, type, url) values(1, 'content A', 1, 'https://memes.tw/user-text-tmp/1701325529594.png');
+insert into ProductImg(productID, name, type, url) values(2, 'banner B', 0, 'https://memes.tw/user-text-tmp/1701325565805.png');
+insert into ProductImg(productID, name, type, url) values(2, 'content B', 1, 'https://memes.tw/user-text-tmp/1701325704158.png');
+insert into ProductImg(productID, name, type, url) values(3, 'banner C', 0, 'https://memes.tw/user-text-tmp/1701325578286.png');
+insert into ProductImg(productID, name, type, url) values(3, 'content C', 1, 'https://memes.tw/user-text-tmp/1701325713899.png');
+insert into ProductImg(productID, name, type, url) values(4, 'banner D', 0, 'https://memes.tw/user-text-tmp/1701325591362.png');
+insert into ProductImg(productID, name, type, url) values(4, 'content D', 1, 'https://memes.tw/user-text-tmp/1701325721109.png');
+insert into ProductImg(productID, name, type, url) values(5, 'banner E', 0, 'https://memes.tw/user-text-tmp/1701325600931.png');
+insert into ProductImg(productID, name, type, url) values(5, 'content E', 1, 'https://memes.tw/user-text-tmp/1701325728589.png');
+insert into ProductImg(productID, name, type, url) values(6, 'banner F', 0, 'https://memes.tw/user-text-tmp/1701325660041.png');
+insert into ProductImg(productID, name, type, url) values(6, 'content F', 1, 'https://memes.tw/user-text-tmp/1701325735979.png');
+insert into ProductImg(productID, name, type, url) values(7, 'banner G', 0, 'https://memes.tw/user-text-tmp/1701325670890.png');
+insert into ProductImg(productID, name, type, url) values(7, 'content G', 1, 'https://memes.tw/user-text-tmp/1701325744264.png');
+insert into ProductImg(productID, name, type, url) values(8, 'banner H', 0, 'https://memes.tw/user-text-tmp/1701325680227.png');
+insert into ProductImg(productID, name, type, url) values(8, 'content H', 1, 'https://memes.tw/user-text-tmp/1701325752550.png');
+insert into ProductImg(productID, name, type, url) values(9, 'banner I', 0, 'https://memes.tw/user-text-tmp/1701325688306.png');
+insert into ProductImg(productID, name, type, url) values(9, 'content I', 1, 'https://memes.tw/user-text-tmp/1701325762085.png');
 COMMIT;
 
 START TRANSACTION;
