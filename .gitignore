@@ -1,1 +1,11 @@
+.Ds_Store
+.vscode/*
 .vscode/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+.env
