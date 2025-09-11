@@ -1,0 +1,7 @@
+-- 建立資料庫（如果尚未存在）
+CREATE DATABASE IF NOT EXISTS TheShopDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 允許 root 遠端登入（僅限開發環境）
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'P@ssw0rd';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

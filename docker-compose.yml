@@ -2,16 +2,14 @@ version: '3.9'
 
 services:
   db:
+    image: mysql:8.0
     container_name: theshop-db
-    build: ./
     restart: always
     environment:
-      MYSQL_DATABASE: 'TheShopDB'
-      MYSQL_ROOT_PASSWORD: 'P@ssw0rd'
-      MYSQL_CHARSET: utf8mb4
-      MYSQL_COLLATION: utf8mb4_unicode_ci
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_DATABASE: TheShopDB
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -19,6 +17,6 @@ services:
 
 volumes:
   mysql_data:
-   
+
 networks:
   shop_network:
