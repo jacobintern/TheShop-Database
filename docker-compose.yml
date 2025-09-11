@@ -22,4 +22,3 @@ volumes:
    
 networks:
   shop_network:
-   external: true
