@@ -7,7 +7,7 @@ CREATE TABLE Account (
     pswd VARCHAR(100) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT PK_Accounts PRIMARY KEY(accID),
-    UNIQUE(Account)
+    UNIQUE(account)
 );
 
 -- 會員資訊
@@ -22,7 +22,8 @@ CREATE TABLE Member (
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Members PRIMARY KEY(memberID),
-    CONSTRAINT FK_Accounts_Members FOREIGN KEY(accID) REFERENCES Accounts(accID),
+    CONSTRAINT FK_Account_Member FOREIGN KEY(accID) REFERENCES Account(accID),
+    UNIQUE(accID),
     UNIQUE(id)
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE DeliveryPrefer (
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_DeliveryPrefer PRIMARY KEY(preferID),
-    CONSTRAINT FK_Members_DeliveryPrefer FOREIGN KEY(memberID) REFERENCES Members(memberID),
+    CONSTRAINT FK_Member_DeliveryPrefer FOREIGN KEY(memberID) REFERENCES Member(memberID),
     CONSTRAINT FK_B2BDelivery_DeliveryPrefer FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID)
 );
 
@@ -69,7 +70,8 @@ CREATE TABLE ProductImg (
     url VARCHAR(255) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
-    CONSTRAINT PK_ProductImg PRIMARY KEY(imgID)
+    CONSTRAINT PK_ProductImg PRIMARY KEY(imgID),
+    CONSTRAINT FK_Product_ProductImg FOREIGN KEY(productID) REFERENCES Product(productID)
 );
 
 -- 庫存更新日誌
@@ -80,18 +82,18 @@ CREATE TABLE StockTracking (
     afterValue INT NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT PK_StockTracking PRIMARY KEY(trackID),
-    CONSTRAINT FK_Products_StockTracking FOREIGN KEY(productID) REFERENCES Products(productID)
+    CONSTRAINT FK_Product_StockTracking FOREIGN KEY(productID) REFERENCES Product(productID)
 );
 
 -- 訂單
-CREATE TABLE Order (
+CREATE TABLE Orders (
     orderID INT NOT NULL AUTO_INCREMENT,
     accID INT NOT NULL,
     total DECIMAL(6,2) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
-    CONSTRAINT PK_Order PRIMARY KEY(orderID),
-    CONSTRAINT FK_Accounts_Orders FOREIGN KEY(accID) REFERENCES Accounts(accID)
+    CONSTRAINT PK_Orders PRIMARY KEY(orderID),
+    CONSTRAINT FK_Account_Orders FOREIGN KEY(accID) REFERENCES Account(accID)
 );
 
 -- 訂單明細
@@ -102,7 +104,7 @@ CREATE TABLE OrderBody (
     num INT NOT NULL,
     subTotal DECIMAL(6,2) NOT NULL,
     CONSTRAINT PK_OrderBody PRIMARY KEY(bodyID),
-    CONSTRAINT FK_Products_OrderBody FOREIGN KEY(productID) REFERENCES Products(productID),
+    CONSTRAINT FK_Product_OrderBody FOREIGN KEY(productID) REFERENCES Product(productID),
     CONSTRAINT FK_Orders_OrderBody FOREIGN KEY(orderID) REFERENCES Orders(orderID)
 );
 
