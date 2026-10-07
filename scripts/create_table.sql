@@ -53,7 +53,7 @@ CREATE TABLE DeliveryPrefer (
 CREATE TABLE Product (
     productID INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    price DECIMAL(6,2) NOT NULL,
+    price DECIMAL(12,2) NOT NULL,
     stock INT NOT NULL,
     spec TEXT,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
@@ -89,7 +89,7 @@ CREATE TABLE StockTracking (
 CREATE TABLE Orders (
     orderID INT NOT NULL AUTO_INCREMENT,
     accID INT NOT NULL,
-    total DECIMAL(6,2) NOT NULL,
+    total DECIMAL(12,2) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Orders PRIMARY KEY(orderID),
@@ -102,7 +102,7 @@ CREATE TABLE OrderBody (
     productID INT NOT NULL,
     orderID INT NOT NULL,
     num INT NOT NULL,
-    subTotal DECIMAL(6,2) NOT NULL,
+    subTotal DECIMAL(12,2) NOT NULL,
     CONSTRAINT PK_OrderBody PRIMARY KEY(bodyID),
     CONSTRAINT FK_Product_OrderBody FOREIGN KEY(productID) REFERENCES Product(productID),
     CONSTRAINT FK_Orders_OrderBody FOREIGN KEY(orderID) REFERENCES Orders(orderID)
