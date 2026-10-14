@@ -90,10 +90,17 @@ CREATE TABLE Orders (
     orderID INT NOT NULL AUTO_INCREMENT,
     accID INT NOT NULL,
     total DECIMAL(12,2) NOT NULL,
+    -- pending / paid / shipped / completed / cancelled
+    status VARCHAR(20) NOT NULL DEFAULT 'pending',
+    deliveryID INT NOT NULL,
+    storeName VARCHAR(255) NOT NULL,
+    receiverName VARCHAR(255) NOT NULL,
+    receiverPhone VARCHAR(20) NOT NULL,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Orders PRIMARY KEY(orderID),
-    CONSTRAINT FK_Account_Orders FOREIGN KEY(accID) REFERENCES Account(accID)
+    CONSTRAINT FK_Account_Orders FOREIGN KEY(accID) REFERENCES Account(accID),
+    CONSTRAINT FK_B2BDelivery_Orders FOREIGN KEY(deliveryID) REFERENCES B2BDelivery(deliveryID)
 );
 
 -- 訂單明細
@@ -106,6 +113,20 @@ CREATE TABLE OrderBody (
     CONSTRAINT PK_OrderBody PRIMARY KEY(bodyID),
     CONSTRAINT FK_Product_OrderBody FOREIGN KEY(productID) REFERENCES Product(productID),
     CONSTRAINT FK_Orders_OrderBody FOREIGN KEY(orderID) REFERENCES Orders(orderID)
+);
+
+-- 購物車
+CREATE TABLE CartItem (
+    cartItemID INT NOT NULL AUTO_INCREMENT,
+    accID INT NOT NULL,
+    productID INT NOT NULL,
+    num INT NOT NULL,
+    createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    updateTime DATETIME NULL,
+    CONSTRAINT PK_CartItem PRIMARY KEY(cartItemID),
+    CONSTRAINT FK_Account_CartItem FOREIGN KEY(accID) REFERENCES Account(accID),
+    CONSTRAINT FK_Product_CartItem FOREIGN KEY(productID) REFERENCES Product(productID),
+    UNIQUE(accID, productID)
 );
 
 COMMIT;
