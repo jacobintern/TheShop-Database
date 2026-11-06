@@ -56,6 +56,8 @@ CREATE TABLE Product (
     price DECIMAL(12,2) NOT NULL,
     stock INT NOT NULL,
     spec TEXT,
+    -- 1=上架、0=下架
+    status TINYINT NOT NULL DEFAULT 1,
     createTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     updateTime DATETIME NULL,
     CONSTRAINT PK_Product PRIMARY KEY (productID)
